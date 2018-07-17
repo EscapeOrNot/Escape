@@ -1,4 +1,4 @@
-const http = require('http');
+﻿const http = require('http');
 const fs = require('fs');
 
 const express = require('express');
@@ -133,5 +133,5 @@ IO.on('connection', function(socket) {
 });
 
 server.listen(3000, function() {
-  console.log('Game master app listening on port 3000');
+  console.log('Gestionnaire maître du jeu prêt à http://localhost:3000');
 });
