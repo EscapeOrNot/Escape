@@ -1,4 +1,4 @@
-import io from 'socket.io-client';
+﻿import io from 'socket.io-client';
 import React from 'react';
 import { Image, StatusBar, StyleSheet, Text, Vibration, View } from 'react-native';
 import { AppLoading, Audio, Font, KeepAwake, ScreenOrientation } from 'expo';
