@@ -1,5 +1,42 @@
-import React, { Component, Fragment } from 'react'
-import { Breadcrumb, Button, Icon, Modal } from 'antd'
+import React, { Component, Fragment, useState } from 'react'
+import { Breadcrumb, Icon, Modal } from 'antd'
+
+import './GDModal.less'
+
+const CarteIle = () => {
+  const [visibleArea, setVisibleArea] = useState(null)
+  return (
+    <div id="mapWrapper">
+      <map name="carteMap">
+        <area
+          shape="poly"
+          coords="8,16, 177,32, 153,157, 54,161"
+          onMouseEnter={() => setVisibleArea('aquaticArea')}
+          onMouseLeave={() => setVisibleArea(null)}
+          alt="Aquatic Area"
+        />
+        <area
+          shape="poly"
+          coords="406,58, 485,67, 521,78, 496,126, 447,132, 427,155, 388,134, 295,163, 288,116"
+          onMouseEnter={() => setVisibleArea('birdsArea')}
+          onMouseLeave={() => setVisibleArea(null)}
+          alt="Birds Area"
+        />
+      </map>
+      {visibleArea === 'aquaticArea' && (
+        <div onMouseEnter={() => setVisibleArea('aquaticArea')} id="aquaticArea">
+          AQUATIC AREA
+        </div>
+      )}
+      {visibleArea === 'birdsArea' && (
+        <div onMouseEnter={() => setVisibleArea('birdsArea')} id="birdsArea">
+          BIRDS AREA
+        </div>
+      )}
+      <img width="100%" src="./carte-ile-vide.jpg" useMap="#carteMap" alt="Map" />
+    </div>
+  )
+}
 
 class GDModal extends Component {
   constructor(props) {
@@ -42,6 +79,10 @@ class GDModal extends Component {
     )
   }
 
+  renderIle() {
+    return <CarteIle />
+  }
+
   render() {
     const { activeSection, folderOpen } = this.state
 
@@ -71,14 +112,23 @@ class GDModal extends Component {
             this[`render${activeSection}`] && this[`render${activeSection}`]()
           ) : (
             <Fragment>
-              <div className="folder folder-small" onClick={() => this.setState({ activeSection: 'Liste' })}>
+              <div
+                className="folder folder-small"
+                onClick={() => this.setState({ activeSection: 'Liste' })}
+              >
                 <div className="folder-name folder-name-dark">Liste</div>
               </div>
-              <div className="folder folder-small" onClick={() => this.setState({ activeSection: 'Animation' })}>
+              <div
+                className="folder folder-small"
+                onClick={() => this.setState({ activeSection: 'Animation' })}
+              >
                 <div className="folder-name folder-name-dark">Animation</div>
               </div>
-              <div className="folder folder-small" onClick={() => this.setState({ activeSection: 'Île' })}>
-                <div className="folder-name folder-name-dark">Île</div>
+              <div
+                className="folder folder-small"
+                onClick={() => this.setState({ activeSection: 'Ile' })}
+              >
+                <div className="folder-name folder-name-dark">Ile</div>
               </div>
             </Fragment>
           )}

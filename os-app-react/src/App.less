@@ -1,0 +1,118 @@
+@import '../node_modules/antd/dist/antd.less';
+
+*[role="button"] {
+  cursor: pointer;
+}
+
+@modal-header-bg: linear-gradient(125deg, #2c7fa2, darken(#2c7fa2, 20%));
+@component-background: linear-gradient(125deg, darken(#2c7fa2, 20%), darken(#2c7fa2, 30%));
+@border-color-split: darken(#2c7fa2, 20%);
+
+@breadcrumb-base-color: #dddddd !important;
+@breadcrumb-last-item-color: @breadcrumb-base-color;
+@breadcrumb-link-color: @breadcrumb-base-color;
+@breadcrumb-link-color-hover: #ffffff !important;
+@breadcrumb-separator-color: @breadcrumb-base-color;
+@breadcrumb-separator-margin: 0 @padding-xs;
+
+.ant-modal-content {
+  background: @component-background;
+}
+
+.App {
+  text-align: center;
+  background-image: url(./background.png);
+  background-color: #282c34;
+  background-color: #111;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: calc(8px + 1.5vmin);
+  color: white;
+}
+
+.folder {
+  cursor: pointer;
+  position: relative;
+  width: 100px;
+  height: 90px;
+  margin: 20px 20px 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+@folder-bg: linear-gradient(125deg, #4ba4e4, darken(#4ba4e4, 30%));
+
+.folder:before {
+    content: "";
+    width: 40%;
+    height:15%;
+    background: @folder-bg;
+    position: absolute;
+    top: 0%;
+    left: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.folder:after {
+    content: "";
+    width: 100%;
+    height:75%;
+    background: @folder-bg;
+    position: absolute;
+    top: 15%;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.folder .folder-name {
+  color: #dddddd;
+  width: 100px;
+  position: absolute;
+  top: 90px;
+  font-size: 0.9em;
+}
+
+.folder.folder-small {
+  width: 50px;
+  height: 45px;
+  margin: 10px 10px 40px;
+}
+
+.folder.folder-small .folder-name {
+  font-size: 0.9em;
+  width: 90px;
+  top: 45px;
+  left: -20px;
+}
+
+#copyToUSBButtonContainer {
+  position: absolute;;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+#copyToUSBButton {
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  padding: 10px 70px;
+  background-color: #990022;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.copy-panel {
+  padding: 20px 20%;
+  background: rgba(255,255,255, 0.1);
+}
