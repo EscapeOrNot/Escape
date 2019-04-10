@@ -5,6 +5,9 @@ import './App.less'
 
 import GDModal from './GDModal/GDModal.jsx'
 
+// Total load duration: 10 minutes
+const loadDuration = 10 * 60 * 1000
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -12,6 +15,7 @@ class App extends Component {
     this.state = {
       copyingModalOpen: false,
       copyingPercent: 0,
+      countDownRunning: false,
       folderOpen: false,
       folderOpenName: '',
     }
@@ -38,6 +42,13 @@ class App extends Component {
   }
 
   startCountDown() {
+    const { countDownRunning } = this.state
+    if (countDownRunning || (this.interval !== null && this.interval !== undefined)) {
+      return
+    }
+
+    this.setState({ countDownRunning: true })
+
     this.interval = setInterval(() => {
       const { copyingPercent } = this.state
       if (copyingPercent < 100) {
@@ -46,26 +57,32 @@ class App extends Component {
         clearInterval(this.interval)
         this.interval = null
       }
-    }, 1000)
+    }, loadDuration / 100)
   }
 
   render() {
-    const { copyingModalOpen, copyingPercent, folderOpen, folderOpenName } = this.state
+    const {
+      copyingModalOpen,
+      copyingPercent,
+      countDownRunning,
+      folderOpen,
+      folderOpenName,
+    } = this.state
 
     return (
       <div className="App">
         <div className="folder" onClick={() => this.showModal('Project 1')}>
-          <div className="folder-name">Project 1</div>
+          <div className="folder-name">DNA Sequencing</div>
         </div>
         <GDModal />
         <div className="folder" onClick={() => this.showModal('Project 3')}>
-          <div className="folder-name">Project 3</div>
+          <div className="folder-name">Classical Genetic Research</div>
         </div>
         <div className="folder" onClick={() => this.showModal('Project 4')}>
-          <div className="folder-name">Project 4</div>
+          <div className="folder-name">Genetic Characterization</div>
         </div>
         <div id="copyToUSBButtonContainer">
-          {!this.interval ? (
+          {!countDownRunning ? (
             <div id="copyToUSBButton" onClick={this.startCountDown}>
               Copy to USB
             </div>
@@ -91,10 +108,19 @@ class App extends Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={null}
+          width={800}
         >
-          <p>foo...</p>
-          <p>foo...</p>
-          <p>foo...</p>
+          <embed
+            src={
+              folderOpenName === 'Project 1'
+                ? './DNA-SEQUENCING.pdf'
+                : (folderOpenName === 'Project 3' && 'CLASSICAL-GENETIC-RESEARCH.pdf') ||
+                  'GENETIC-CHARACTERIZATION.pdf'
+            }
+            width="100%"
+            height="600"
+            type="application/pdf"
+          />
         </Modal>
         <Modal
           closable={copyingPercent >= 100}

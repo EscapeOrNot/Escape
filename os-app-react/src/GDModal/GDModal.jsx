@@ -3,7 +3,7 @@ import { Breadcrumb, Icon, Modal } from 'antd'
 
 import './GDModal.less'
 
-const CarteIle = () => {
+const CarteIsland = () => {
   const [visibleArea, setVisibleArea] = useState(null)
   return (
     <div id="mapWrapper">
@@ -22,6 +22,27 @@ const CarteIle = () => {
           onMouseLeave={() => setVisibleArea(null)}
           alt="Birds Area"
         />
+        <area
+          shape="poly"
+          coords="523,101, 537,137, 522,195, 495,235, 376,306, 328,294, 298,162, 388,133, 433,157, 452,134"
+          onMouseEnter={() => setVisibleArea('tropicalForestArea')}
+          onMouseLeave={() => setVisibleArea(null)}
+          alt="Tropical Forest Area"
+        />
+        <area
+          shape="poly"
+          coords="523,101, 563,108, 590,169, 587,288, 436,338, 298,162, 388,133, 433,157, 452,134"
+          onMouseEnter={() => setVisibleArea('temperedArea')}
+          onMouseLeave={() => setVisibleArea(null)}
+          alt="Tempered Area"
+        />
+        <area
+          shape="poly"
+          coords="587,288, 656,286, 721,297, 750,363, 728,432, 643,421, 591,383, 552,297"
+          onMouseEnter={() => setVisibleArea('desertArea')}
+          onMouseLeave={() => setVisibleArea(null)}
+          alt="Desert Area"
+        />
       </map>
       {visibleArea === 'aquaticArea' && (
         <div onMouseEnter={() => setVisibleArea('aquaticArea')} id="aquaticArea">
@@ -33,7 +54,78 @@ const CarteIle = () => {
           BIRDS AREA
         </div>
       )}
+      {visibleArea === 'tropicalForestArea' && (
+        <div onMouseEnter={() => setVisibleArea('tropicalForestArea')} id="tropicalForestArea">
+          TROPICAL FOREST AREA
+        </div>
+      )}
+      {visibleArea === 'temperedArea' && (
+        <div onMouseEnter={() => setVisibleArea('temperedArea')} id="temperedArea">
+          TEMPERED AREA
+        </div>
+      )}
+      {visibleArea === 'desertArea' && (
+        <div onMouseEnter={() => setVisibleArea('desertArea')} id="desertArea">
+          DESERT AREA
+        </div>
+      )}
       <img width="100%" src="./carte-ile-vide.jpg" useMap="#carteMap" alt="Map" />
+    </div>
+  )
+}
+
+const EraList = () => {
+  const [activeEra, setActiveEra] = useState(null)
+
+  if (activeEra === 'carboniferous') {
+    return (
+      <div>
+        <img width="100%" src="./carboniferous/paleothyris.png" useMap="#carteMap" alt="Map" />
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <div className="folder folder-small" onClick={() => setActiveEra('carboniferous')}>
+        <div className="folder-name folder-name-dark">Carboniferous</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'permian' })}
+      >
+        <div className="folder-name folder-name-dark">Permian</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'triassic' })}
+      >
+        <div className="folder-name folder-name-dark">Triassic</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'jurassic' })}
+      >
+        <div className="folder-name folder-name-dark">Jurassic</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'cretaceous' })}
+      >
+        <div className="folder-name folder-name-dark">Cretaceous</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'paleogene' })}
+      >
+        <div className="folder-name folder-name-dark">Paleogene</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'neogene' })}
+      >
+        <div className="folder-name folder-name-dark">Neogene</div>
+      </div>
     </div>
   )
 }
@@ -53,22 +145,21 @@ class GDModal extends Component {
   }
 
   handleOk() {
-    this.setState({ folderOpen: false })
+    this.setState({ activeSection: '', folderOpen: false })
   }
 
   handleCancel() {
-    this.setState({ folderOpen: false })
+    this.setState({ activeSection: '', folderOpen: false })
   }
 
   showModal(folderName) {
     this.setState({
       folderOpen: true,
-      folderOpenName: folderName,
     })
   }
 
   renderList() {
-    return
+    return <embed src="./SPECIES-INDEX.pdf" width="100%" height="700" type="application/pdf" />
   }
 
   renderAnimation() {
@@ -79,8 +170,8 @@ class GDModal extends Component {
     )
   }
 
-  renderIle() {
-    return <CarteIle />
+  renderIsland() {
+    return <CarteIsland />
   }
 
   render() {
@@ -114,9 +205,9 @@ class GDModal extends Component {
             <Fragment>
               <div
                 className="folder folder-small"
-                onClick={() => this.setState({ activeSection: 'Liste' })}
+                onClick={() => this.setState({ activeSection: 'List' })}
               >
-                <div className="folder-name folder-name-dark">Liste</div>
+                <div className="folder-name folder-name-dark">List</div>
               </div>
               <div
                 className="folder folder-small"
@@ -126,9 +217,9 @@ class GDModal extends Component {
               </div>
               <div
                 className="folder folder-small"
-                onClick={() => this.setState({ activeSection: 'Ile' })}
+                onClick={() => this.setState({ activeSection: 'Island' })}
               >
-                <div className="folder-name folder-name-dark">Ile</div>
+                <div className="folder-name folder-name-dark">Island</div>
               </div>
             </Fragment>
           )}
