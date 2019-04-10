@@ -113,9 +113,10 @@ class App extends Component {
           <embed
             src={
               folderOpenName === 'Project 1'
-                ? './DNA-SEQUENCING.pdf'
-                : (folderOpenName === 'Project 3' && 'CLASSICAL-GENETIC-RESEARCH.pdf') ||
-                  'GENETIC-CHARACTERIZATION.pdf'
+                ? process.env.PUBLIC_URL + '/DNA-SEQUENCING.pdf'
+                : (folderOpenName === 'Project 3' &&
+                    process.env.PUBLIC_URL + '/CLASSICAL-GENETIC-RESEARCH.pdf') ||
+                  process.env.PUBLIC_URL + '/GENETIC-CHARACTERIZATION.pdf'
             }
             width="100%"
             height="600"
