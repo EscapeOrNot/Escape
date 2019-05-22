@@ -61,26 +61,11 @@ class App extends Component {
   }
 
   render() {
-    const {
-      copyingModalOpen,
-      copyingPercent,
-      countDownRunning,
-      folderOpen,
-      folderOpenName,
-    } = this.state
+    const { copyingModalOpen, copyingPercent, countDownRunning } = this.state
 
     return (
       <div className="App">
-        <div className="folder" onClick={() => this.showModal('Project 1')}>
-          <div className="folder-name">DNA Sequencing</div>
-        </div>
         <GDModal />
-        <div className="folder" onClick={() => this.showModal('Project 3')}>
-          <div className="folder-name">Classical Genetic Research</div>
-        </div>
-        <div className="folder" onClick={() => this.showModal('Project 4')}>
-          <div className="folder-name">Genetic Characterization</div>
-        </div>
         <div id="copyToUSBButtonContainer">
           {!countDownRunning ? (
             <div id="copyToUSBButton" onClick={this.startCountDown}>
@@ -102,27 +87,6 @@ class App extends Component {
             </div>
           )}
         </div>
-        <Modal
-          title={<div>{folderOpenName}</div>}
-          visible={folderOpen}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          footer={null}
-          width={800}
-        >
-          <embed
-            src={
-              folderOpenName === 'Project 1'
-                ? process.env.PUBLIC_URL + '/DNA-SEQUENCING.pdf'
-                : (folderOpenName === 'Project 3' &&
-                    process.env.PUBLIC_URL + '/CLASSICAL-GENETIC-RESEARCH.pdf') ||
-                  process.env.PUBLIC_URL + '/GENETIC-CHARACTERIZATION.pdf'
-            }
-            width="100%"
-            height="600"
-            type="application/pdf"
-          />
-        </Modal>
         <Modal
           closable={copyingPercent >= 100}
           footer={null}

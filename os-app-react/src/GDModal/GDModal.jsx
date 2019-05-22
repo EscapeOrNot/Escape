@@ -91,6 +91,19 @@ const EraList = () => {
       'paleothyris',
       'pulmonoscorpius',
     ],
+    permian: [
+      'helicoprion',
+      'dimetrodon',
+      'scutosaurus',
+      'gorgonopsien',
+      'mesosaurus',
+      'cacops-aspidephorus',
+      'coelurosauravus',
+      'claudiosaurus',
+      'diictodon',
+      'ophiacodon',
+      'pareiasaurus',
+    ],
   }
 
   if (activeEra) {
@@ -129,40 +142,22 @@ const EraList = () => {
       <div className="folder folder-small" onClick={() => setActiveEra('carboniferous')}>
         <div className="folder-name folder-name-dark">Carboniferous</div>
       </div>
-      <div
-        className="folder folder-small"
-        onClick={() => this.setState({ setActiveEra: 'permian' })}
-      >
+      <div className="folder folder-small" onClick={() => setActiveEra('permian')}>
         <div className="folder-name folder-name-dark">Permian</div>
       </div>
-      <div
-        className="folder folder-small"
-        onClick={() => this.setState({ setActiveEra: 'triassic' })}
-      >
+      <div className="folder folder-small" onClick={() => setActiveEra('triassic')}>
         <div className="folder-name folder-name-dark">Triassic</div>
       </div>
-      <div
-        className="folder folder-small"
-        onClick={() => this.setState({ setActiveEra: 'jurassic' })}
-      >
+      <div className="folder folder-small" onClick={() => setActiveEra('jurassic')}>
         <div className="folder-name folder-name-dark">Jurassic</div>
       </div>
-      <div
-        className="folder folder-small"
-        onClick={() => this.setState({ setActiveEra: 'cretaceous' })}
-      >
+      <div className="folder folder-small" onClick={() => setActiveEra('cretaceous')}>
         <div className="folder-name folder-name-dark">Cretaceous</div>
       </div>
-      <div
-        className="folder folder-small"
-        onClick={() => this.setState({ setActiveEra: 'paleogene' })}
-      >
+      <div className="folder folder-small" onClick={() => setActiveEra('paleogene')}>
         <div className="folder-name folder-name-dark">Paleogene</div>
       </div>
-      <div
-        className="folder folder-small"
-        onClick={() => this.setState({ setActiveEra: 'neogene' })}
-      >
+      <div className="folder folder-small" onClick={() => setActiveEra('neogene')}>
         <div className="folder-name folder-name-dark">Neogene</div>
       </div>
     </div>
@@ -205,7 +200,7 @@ class GDModal extends Component {
   renderAnimation() {
     return (
       <video width="100%" controls={false} preload autoPlay loop>
-        <source src="./video.mov" type="video/mp4" />
+        <source src="./video.mp4" type="video/mp4" />
       </video>
     )
   }
