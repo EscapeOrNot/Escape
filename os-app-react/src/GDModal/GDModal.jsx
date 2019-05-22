@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component, Fragment, useState } from 'react'
 import { Breadcrumb, Icon, Modal } from 'antd'
 
@@ -74,61 +75,99 @@ const CarteIsland = () => {
   )
 }
 
-// const EraList = () => {
-//   const [activeEra, setActiveEra] = useState(null)
+const EraList = () => {
+  const [activeEra, setActiveEra] = useState(null)
+  const [activeDino, setActiveDino] = useState(null)
+  const eraDinos = {
+    carboniferous: [
+      'archaeothyris',
+      'casineria',
+      'dunkleosteus',
+      'gephyrostegus',
+      'hylonomus',
+      'meganeura-monyi',
+      'megarachne-servinei',
+      'microbrachis',
+      'paleothyris',
+      'pulmonoscorpius',
+    ],
+  }
 
-//   if (activeEra === 'carboniferous') {
-//     return (
-//       <div>
-//         <img width="100%" src="./carboniferous/paleothyris.png" useMap="#carteMap" alt="Map" />
-//       </div>
-//     )
-//   }
+  if (activeEra) {
+    return (
+      <Fragment>
+        <h2 role={activeDino ? 'button' : ''} onClick={() => setActiveDino(null)}>
+          {activeDino ? (
+            <Fragment>
+              <Icon type="left" /> Retour
+            </Fragment>
+          ) : (
+            _.startCase(activeEra)
+          )}
+        </h2>
+        {activeDino ? (
+          <img width="100%" src={`./${activeEra}/${activeDino}.png`} useMap="#carteMap" alt="Map" />
+        ) : (
+          <div className="folder-container">
+            {(eraDinos[activeEra] || []).map(dinoName => (
+              <div
+                key={dinoName}
+                className="folder folder-small"
+                onClick={() => setActiveDino(dinoName)}
+              >
+                <div className="folder-name folder-name-dark">{_.startCase(dinoName)}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </Fragment>
+    )
+  }
 
-//   return (
-//     <div>
-//       <div className="folder folder-small" onClick={() => setActiveEra('carboniferous')}>
-//         <div className="folder-name folder-name-dark">Carboniferous</div>
-//       </div>
-//       <div
-//         className="folder folder-small"
-//         onClick={() => this.setState({ setActiveEra: 'permian' })}
-//       >
-//         <div className="folder-name folder-name-dark">Permian</div>
-//       </div>
-//       <div
-//         className="folder folder-small"
-//         onClick={() => this.setState({ setActiveEra: 'triassic' })}
-//       >
-//         <div className="folder-name folder-name-dark">Triassic</div>
-//       </div>
-//       <div
-//         className="folder folder-small"
-//         onClick={() => this.setState({ setActiveEra: 'jurassic' })}
-//       >
-//         <div className="folder-name folder-name-dark">Jurassic</div>
-//       </div>
-//       <div
-//         className="folder folder-small"
-//         onClick={() => this.setState({ setActiveEra: 'cretaceous' })}
-//       >
-//         <div className="folder-name folder-name-dark">Cretaceous</div>
-//       </div>
-//       <div
-//         className="folder folder-small"
-//         onClick={() => this.setState({ setActiveEra: 'paleogene' })}
-//       >
-//         <div className="folder-name folder-name-dark">Paleogene</div>
-//       </div>
-//       <div
-//         className="folder folder-small"
-//         onClick={() => this.setState({ setActiveEra: 'neogene' })}
-//       >
-//         <div className="folder-name folder-name-dark">Neogene</div>
-//       </div>
-//     </div>
-//   )
-// }
+  return (
+    <div>
+      <div className="folder folder-small" onClick={() => setActiveEra('carboniferous')}>
+        <div className="folder-name folder-name-dark">Carboniferous</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'permian' })}
+      >
+        <div className="folder-name folder-name-dark">Permian</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'triassic' })}
+      >
+        <div className="folder-name folder-name-dark">Triassic</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'jurassic' })}
+      >
+        <div className="folder-name folder-name-dark">Jurassic</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'cretaceous' })}
+      >
+        <div className="folder-name folder-name-dark">Cretaceous</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'paleogene' })}
+      >
+        <div className="folder-name folder-name-dark">Paleogene</div>
+      </div>
+      <div
+        className="folder folder-small"
+        onClick={() => this.setState({ setActiveEra: 'neogene' })}
+      >
+        <div className="folder-name folder-name-dark">Neogene</div>
+      </div>
+    </div>
+  )
+}
 
 class GDModal extends Component {
   constructor(props) {
@@ -159,7 +198,8 @@ class GDModal extends Component {
   }
 
   renderList() {
-    return <embed src="./SPECIES-INDEX.pdf" width="100%" height="700" type="application/pdf" />
+    return <EraList />
+    // return <embed src="./SPECIES-INDEX.pdf" width="100%" height="700" type="application/pdf" />
   }
 
   renderAnimation() {
